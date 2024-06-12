@@ -16,25 +16,31 @@ export default defineConfig({
     host: "0.0.0.0",
     port: 5173,
     proxy: {
-      "/api": {
-        //target:"http://127.0.0.1:4523/m1/4509217-0-default",
-        target: "http://127.0.0.1:5000", //接口地址
-        changeOrigin: true,
-        rewrite: (path) => {
-          const newPath = path.replace(/^\/api/, "/api");
-          console.log(`Rewriting path from ${path} to ${newPath}`);
-          return newPath;
-        },
+      // "/api": {
+      //   target:"http://127.0.0.1:4523/m1/4633956-4284432-default",
+      //   target: "http://127.0.0.1:5000", //接口地址
+      //   changeOrigin: true,
+      //   rewrite: (path) => {
+      //     const newPath = path.replace(/^\/api/, "/api");
+      //     console.log(`Rewriting path from ${path} to ${newPath}`);
+      //     return newPath;
+      //   },
+      //   },
         "/predict": {
           target: "http://localhost:6000",
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/predict/, ""),
         },
         "/get-title": {
-          target: "http://localhost:7000",
+          target:"http://127.0.0.1:4523/m1/4633956-4284432-default",
+          // target: "http://localhost:7000",
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/get-title/, ""),
-        },
+          onProxyReq: (proxyReq, req, res) => {
+            console.log('Request URL:', req.url);
+          } ,        
+          pathRewrite: {
+            "^/get-title": "/get-title"
+          }
       },
     },
   },

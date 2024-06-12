@@ -1,24 +1,24 @@
 export default {
   // 创建一个函数
-  async testPost(postData) {
-    try {
-      const response = await fetch("/api/testPost", {
-        method: "POST",
-        body: postData,
-        mode: "cors"
-      });
+  // async testPost(postData) {
+  //   try {
+  //     const response = await fetch("/api/testPost", {
+  //       method: "POST",
+  //       body: postData,
+  //       mode: "cors"
+  //     });
     
-      const data = await response.json();
-      console.log("后端响应:", data);
-      return data;
-    }
-    catch (error) {
-      throw error;
-    }
-  },
-  async doimgUpload(UploadData) {
+  //     const data = await response.json();
+  //     console.log("后端响应:", data);
+  //     return data;
+  //   }
+  //   catch (error) {
+  //     throw error;
+  //   }
+  // },
+  async generateTitle(UploadData) {
     try {
-      const backend = await fetch("/api/imgUpload", {
+      const backend = await fetch("/get-title", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -36,9 +36,9 @@ export default {
       throw error;
     }
   },
-  async likeImage(UploadData) {
+  async classifynews(UploadData) {
     try {
-      const backend = await fetch("/api/likeImage", {
+      const backend = await fetch("/predict", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,7 +51,7 @@ export default {
         console.log(jsonData.response.msg);
         throw new Error("网络请求错误");
       }
-      return jsonData.response.msg;
+      return jsonData.response.data;
     } catch (error) {
       throw error;
     }

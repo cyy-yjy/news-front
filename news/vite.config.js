@@ -24,7 +24,17 @@ export default defineConfig({
           const newPath = path.replace(/^\/api/, "/api");
           console.log(`Rewriting path from ${path} to ${newPath}`);
           return newPath;
-        }
+        },
+        "/predict": {
+          target: "http://localhost:6000",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/predict/, ""),
+        },
+        "/get-title": {
+          target: "http://localhost:7000",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/get-title/, ""),
+        },
       },
     },
   },

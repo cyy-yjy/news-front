@@ -7,7 +7,7 @@ export default {
   //       body: postData,
   //       mode: "cors"
   //     });
-    
+
   //     const data = await response.json();
   //     console.log("后端响应:", data);
   //     return data;
@@ -25,8 +25,10 @@ export default {
         },
         body: JSON.stringify(UploadData),
       });
-      const jsonData =await backend.json();
-      console.log("jsonData: ", jsonData);  
+
+      console.log(backend);
+      const jsonData = await backend.json();
+      console.log("jsonData: ", jsonData);
       if (jsonData.response.isError) {
         console.log(jsonData.response.msg);
         throw new Error("网络请求错误");
@@ -43,10 +45,10 @@ export default {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(UploadData)
+        body: JSON.stringify(UploadData),
       });
       const jsonData = await backend.json();
-      console.log("jsonData: ", jsonData); 
+      console.log("jsonData: ", jsonData);
       if (jsonData.response.isError) {
         console.log(jsonData.response.msg);
         throw new Error("网络请求错误");
@@ -60,7 +62,7 @@ export default {
     try {
       const backend = await fetch("/api/getAllLikes");
       const jsonData = await backend.json();
-      console.log("getAllLikes: ", jsonData); 
+      console.log("getAllLikes: ", jsonData);
       if (jsonData.response.isError) {
         console.log(jsonData.response.msg);
         throw new Error("网络请求错误");
@@ -69,5 +71,5 @@ export default {
     } catch (error) {
       throw error;
     }
-  }
-}
+  },
+};

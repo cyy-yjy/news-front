@@ -26,21 +26,22 @@ export default defineConfig({
       //     return newPath;
       //   },
       //   },
-        "/predict": {
-          target: "http://localhost:6000",
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/predict/, ""),
+      "/predict": {
+        target: "http://127.0.0.1:6000",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/predict/, ""),
+      },
+      "/get-title": {
+        //target:"http://127.0.0.1:4523/m1/4633956-4284432-default",
+        target: "http://127.0.0.1:7000",
+        changeOrigin: true,
+        rewrite: (path) => {
+          console.log(`Rewriting path to ${path}`);
+          return path;
         },
-        "/get-title": {
-          target:"http://127.0.0.1:4523/m1/4633956-4284432-default",
-          // target: "http://localhost:7000",
-          changeOrigin: true,
-          onProxyReq: (proxyReq, req, res) => {
-            console.log('Request URL:', req.url);
-          } ,        
-          pathRewrite: {
-            "^/get-title": "/get-title"
-          }
+        onProxyReq: (proxyReq, req, res) => {
+          console.log("Request URL:", req.url);
+        },
       },
     },
   },

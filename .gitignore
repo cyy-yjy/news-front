@@ -1,0 +1,29 @@
+# Existing rules in the main .gitignore file
+*.log
+node_modules
+dist
+
+# Ignore contents of news folder
+
+news/.DS_Store
+news/node_modules
+news/dist
+
+# local env files
+news/.env.local
+news/.env.*.local
+
+# Log files
+news/npm-debug.log*
+news/yarn-debug.log*
+news/yarn-error.log*
+news/pnpm-debug.log*
+
+# Editor directories and files
+news/.idea
+news/.vscode
+news/*.suo
+news/*.ntvs*
+news/*.njsproj
+news/*.sln
+news/*.sw?

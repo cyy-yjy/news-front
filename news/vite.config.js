@@ -36,20 +36,8 @@ export default defineConfig({
       "/predict": {
         target: "http://127.0.0.1:6000",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/predict/, ""),
       },
       "/get-title": {
-<<<<<<< HEAD
-        //target:"http://127.0.0.1:4523/m1/4633956-4284432-default",
-        target: "http://127.0.0.1:7000",
-        changeOrigin: true,
-        rewrite: (path) => {
-          console.log(`Rewriting path to ${path}`);
-          return path;
-        },
-        onProxyReq: (proxyReq, req, res) => {
-          console.log("Request URL:", req.url);
-=======
         // target:"http://127.0.0.1:4523/m1/4633956-4284432-default",
         target: "http://127.0.0.1:7000",
         changeOrigin: true,
@@ -58,7 +46,6 @@ export default defineConfig({
         },
         pathRewrite: {
           "^/get-title": "/get-title",
->>>>>>> 696e5eb274a41dc1c5deb0f700079938c85749ec
         },
       },
     },

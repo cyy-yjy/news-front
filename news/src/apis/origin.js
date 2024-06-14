@@ -16,6 +16,7 @@ export default {
   //     throw error;
   //   }
   // },
+  // 获得标题
   async generateTitle(UploadData) {
     try {
       const backend = await fetch("/get-title", {
@@ -25,20 +26,13 @@ export default {
         },
         body: JSON.stringify(UploadData),
       });
-<<<<<<< HEAD
-
-      console.log(backend);
+      console.log(JSON.stringify(UploadData));
       const jsonData = await backend.json();
-      console.log("jsonData: ", jsonData);
-=======
-      console.log(JSON.stringify(UploadData))
-      const jsonData =await backend.json();
       // 检查响应状态码
-    if (!backend.ok) {
-      throw new Error(`HTTP error! Status: ${backend.status}`);
-    }
-      console.log("jsonData: ", jsonData);  
->>>>>>> 696e5eb274a41dc1c5deb0f700079938c85749ec
+      if (!backend.ok) {
+        throw new Error(`HTTP error! Status: ${backend.status}`);
+      }
+      console.log("jsonData: ", jsonData);
       if (jsonData.response.isError) {
         console.log(jsonData.response.msg);
         throw new Error("网络请求错误");
@@ -48,6 +42,7 @@ export default {
       throw error;
     }
   },
+  // 新闻分类
   async classifynews(UploadData) {
     try {
       const backend = await fetch("/predict", {
@@ -68,6 +63,7 @@ export default {
       throw error;
     }
   },
+  // 以下是一个get请求的例子
   async getAllLikes() {
     try {
       const backend = await fetch("/api/getAllLikes");

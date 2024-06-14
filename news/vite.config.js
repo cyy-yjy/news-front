@@ -1,15 +1,22 @@
-import { fileURLToPath, URL } from 'node:url'
+import { fileURLToPath, URL } from "node:url";
 
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import path from 'node:path'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import path from "node:path";
 
+import tailwindcss from "tailwindcss";
+import autoprefixer from "autoprefixer";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
+  css: {
+    postcss: {
+      plugins: [tailwindcss, autoprefixer],
     },
   },
   server: {
@@ -32,6 +39,7 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/predict/, ""),
       },
       "/get-title": {
+<<<<<<< HEAD
         //target:"http://127.0.0.1:4523/m1/4633956-4284432-default",
         target: "http://127.0.0.1:7000",
         changeOrigin: true,
@@ -41,6 +49,16 @@ export default defineConfig({
         },
         onProxyReq: (proxyReq, req, res) => {
           console.log("Request URL:", req.url);
+=======
+        // target:"http://127.0.0.1:4523/m1/4633956-4284432-default",
+        target: "http://127.0.0.1:7000",
+        changeOrigin: true,
+        onProxyReq: (proxyReq, req, res) => {
+          console.log("Request URL:", req.url);
+        },
+        pathRewrite: {
+          "^/get-title": "/get-title",
+>>>>>>> 696e5eb274a41dc1c5deb0f700079938c85749ec
         },
       },
     },

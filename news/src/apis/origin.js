@@ -25,10 +25,20 @@ export default {
         },
         body: JSON.stringify(UploadData),
       });
+<<<<<<< HEAD
 
       console.log(backend);
       const jsonData = await backend.json();
       console.log("jsonData: ", jsonData);
+=======
+      console.log(JSON.stringify(UploadData))
+      const jsonData =await backend.json();
+      // 检查响应状态码
+    if (!backend.ok) {
+      throw new Error(`HTTP error! Status: ${backend.status}`);
+    }
+      console.log("jsonData: ", jsonData);  
+>>>>>>> 696e5eb274a41dc1c5deb0f700079938c85749ec
       if (jsonData.response.isError) {
         console.log(jsonData.response.msg);
         throw new Error("网络请求错误");

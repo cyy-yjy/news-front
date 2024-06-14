@@ -1,109 +1,139 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import { particles } from '@/components/particles/1.js'
-//
-</script>
-
 <template>
-  <div class="common-layout">
-    <el-container class="mine_container">
-      <Particles id="tsparticles" class="login__particles" :options="particles" />
-      <el-header class="header">
-        <div class="title">
-          新闻系统
-        </div>
-       
-      </el-header>
-      <el-menu
-                active-text-color="#ffd04b"
-                background-color="#545c64"
-                class="el-menu-vertical-demo"
-                :default-active="menuIndex"
-                text-color="#fff"
-                mode="horizontal"
-                @select="handleSelect"
-              >
-                <el-menu-item index="1">
-                    <el-icon><location /></el-icon>
-                    <span>生成标题</span>
-                </el-menu-item>
-                <el-menu-item index="2">
-                  <el-icon><icon-menu /></el-icon>
-                  <span>标题分类</span>
-                </el-menu-item>
-                <el-menu-item index="3">
-                  <el-icon><document /></el-icon>
-                  <span>获得词云图</span>
-                </el-menu-item>
-            </el-menu>
-      <el-main>
-        <router-view />
-      </el-main>
-    </el-container>
+  <div class="root-box">
+    <Header />
+    <Title />
+    <div class="common-layout">
+      <ImgList />
+      <Nav />
+      <el-container class="mine_container">
+        <Particles
+          id="tsparticles"
+          class="login__particles"
+          :options="particles"
+        />
+        <el-main>
+          <router-view />
+        </el-main>
+      </el-container>
+    </div>
+    <Footer />
   </div>
 </template>
-<script>
-import { ref} from 'vue'
-import router from '@/router/index.js'
+
+<script setup>
+import { ref, onMounted, computed } from "vue";
+import { RouterLink, RouterView } from "vue-router";
+import { particles } from "@/components/particles/1.js";
+import Header from "@/components/header.vue";
+import Footer from "@/components/footer.vue";
+import Nav from "@/components/nav.vue";
+import ImgList from "@/components/imgList.vue";
+import Title from "@/components/title.vue";
+import Test from "@/components/test.vue";
+import router from "@/router/index.js";
+
+//-----------header-----------
+const username = "John Doe";
+const role = "Admin";
+
+const currentDate = computed(() => {
+  const today = new Date();
+  return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(
+    2,
+    "0"
+  )}-${String(today.getDate()).padStart(2, "0")}`;
+});
+
+const currentDay = computed(() => {
+  const days = [
+    "星期日",
+    "星期一",
+    "星期二",
+    "星期三",
+    "星期四",
+    "星期五",
+    "星期六",
+  ];
+  const today = new Date().getDay();
+  return days[today];
+});
+//----------------------
+
+const menuIndex = ref("1");
+
 const handleSelect = (index) => {
   switch (index) {
-    case '1':
-      router.push({ name: 'home' });
+    case "1":
+      router.push({ name: "home" });
       break;
-    case '2':
-      router.push({ name: 'classify' });
+    case "2":
+      router.push({ name: "classify" });
       break;
-    case '3':
-      router.push({ name: 'cloud' });
+    case "3":
+      router.push({ name: "cloud" });
       break;
   }
-  console.log(index)
-}
+  console.log(index);
+};
 </script>
+
 <style scoped>
+.root-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  background-image: url("./pics/19.png") url("./pics/20.png");
+  background-size: contain;
+  background-repeat: repeat-y;
+}
 .mine_container {
-  background-color: rgb(252, 253, 247);
-  /* background-image: url("./pics/图片1.png"); */
+  /* background-color: rgb(252, 253, 247); */
   background-attachment: fixed;
   background-repeat: repeat;
   width: 100%;
+  margin-bottom: 10px;
   margin: auto;
-  /* 居中 */
+  
 }
-.header{
-  background-image: url("./pics/图片10.png"),url("./pics/图片7.png");
-  /* background-color: #a1c4fd; */
-  background-position: left top,right top;
-  background-size: 50% 400px,50% auto;
-  background-repeat: no-repeat;
-  height: 400px;
-}
-.el-menu-vertical-demo{
-  margin-bottom: 0px;
-  height:100px;
+.date-time {
   display: flex;
-  border-bottom:0px;
-  justify-content: space-between;
-  /* background-image: url("./pics/图片6.png"); */
-
+  align-items: center;
+  font-size: 14px;
 }
-.title{
-  margin-top: 100px;
-  font-size: 70px;
+.date {
+  margin-right: 10px;
+}
+
+.date,
+.day {
+  font-size: 20px;
+  color: #ffffff;
 }
 .common-layout {
-  top: 0;
-  right: 10;
-  bottom: 10;
-  left: 0;
   width: 100%;
-  height: 100%;
-  position: relative; 
+  height: auto;
+  position: relative;
+  max-width: 1280px;
+}
+.el-main {
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  margin: 5px 0 30px 0;
+  background-color: white;
+  text-align: center;
+  min-height: 600px;
+  height: auto;
+  background-image: url("./pics/16.png");
+  background-size: cover;
+  background-position: right bottom;
+  background-size: cover;
 }
 </style>
+
 <style>
 #app {
-  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
@@ -126,4 +156,3 @@ const handleSelect = (index) => {
   opacity: 0.7;
 }
 </style>
-

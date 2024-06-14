@@ -25,7 +25,12 @@ export default {
         },
         body: JSON.stringify(UploadData),
       });
+      console.log(JSON.stringify(UploadData))
       const jsonData =await backend.json();
+      // 检查响应状态码
+    if (!backend.ok) {
+      throw new Error(`HTTP error! Status: ${backend.status}`);
+    }
       console.log("jsonData: ", jsonData);  
       if (jsonData.response.isError) {
         console.log(jsonData.response.msg);

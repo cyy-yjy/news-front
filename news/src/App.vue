@@ -72,6 +72,9 @@ const handleSelect = (index) => {
     case "3":
       router.push({ name: "cloud" });
       break;
+    case "4":
+      router.push({ name: "read" });
+      break;
   }
   console.log(index);
 };

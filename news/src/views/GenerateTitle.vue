@@ -324,7 +324,6 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background-image: url("../pics/图片10.png"); */
   padding:4px;
   border-radius: 1rem;
   text-align: center;

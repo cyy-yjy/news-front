@@ -26,6 +26,14 @@
           </div></router-link
         >
       </li>
+      <li class="nav-item">
+        <router-link to="/read"
+          ><div style="display: flex; align-items: center; cursor: pointer">
+            <el-icon><Microphone /></el-icon>            
+            <span>语音朗读</span>
+          </div></router-link
+        >
+      </li>
     </ul>
   </nav>
 </template>

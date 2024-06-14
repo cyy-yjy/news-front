@@ -9,8 +9,6 @@
           <select id="voiceSelect" v-model="selectedVoice" @change="updateVoice">
             <option v-for="(voice, index) in voiceList" :key="index" :value="index">{{ voice }}</option>
           </select>
-          <label for="playbackRate">语音生成速度：</label>
-          <input type="number" id="playbackRate" v-model.number="playbackRate" min="0.5" max="2" step="0.1">
         </div>
         <button @click="generateSpeech" :disabled="generating">生成语音</button>
         <span v-if="generating" class="loading-text">生成中...</span>
@@ -27,77 +25,61 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'SpeechGenerator',
-  data() {
-    return {
-      textInput: '',
-      voiceList: [
+<script setup>
+import { ref } from "vue";
+import origin from "@/apis/origin";
+      const textInput=ref('')
+      const voiceList=ref( [
         '小小',
         '小仪',
         '辽宁小北',
         '云哲',
         '湾隆',
         'Themba'
-      ],
-      selectedVoice: 0,
-      audioUrl: '',
-      playbackRate: 1,
-      generating: false,
-      playing: false
-    };
-  },
-  methods: {
-    async generateSpeech() {
+      ])
+const audioPlayer = ref()
+      const audioUrl=ref('')
+      const playing=ref(false)
+      const selectedVoice=ref(0)
+      const generating=ref(false)
+  
+    const generateSpeech= async ()=>{
       try {
-        this.generating = true;
+        generating.value = true;
         const data = {
-          text: this.textInput,
-          voice_type: this.selectedVoice,
-          rate: this.playbackRate // 传递语速参数
+          text: textInput.value,
+          voice_type: selectedVoice.value,
         };
-        const response = await fetch('/get-speech', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        });
-        const responseData = await response.json();
-        if (!responseData.response.isError) {
-          this.audioUrl = responseData.response.data;
-          this.$refs.audioPlayer.load();
-          console.log('音频文件已加载');
-        } else {
-          console.error('生成音频文件失败:', responseData.response.msg);
-        }
+        const response = await origin.generatespeech(data)
+        //const dir = 'D:/vs_temp/text-to-speech/' + response
+        const dir='../assets/'+response
+        console.log("文件路径为" + dir)
+        audioUrl.value = dir
+        audioPlayer.value.load()
       } catch (error) {
         console.error('生成音频文件失败:', error);
       } finally {
-        this.generating = false;
+        generating.value = false;
       }
-    },
-    playSpeech() {
-      if (this.audioUrl) {
-        this.$refs.audioPlayer.playbackRate = this.playbackRate;
-        this.$refs.audioPlayer.play();
-        this.playing = true;
-      }
-    },
-    stopSpeech() {
-      if (this.audioUrl) {
-        this.$refs.audioPlayer.pause();
-        this.$refs.audioPlayer.currentTime = 0;
-        this.playing = false;
-      }
-    },
-    updateVoice() {
-      // 可选：在语音种类更新时进行处理
-      console.log('Voice selection updated:', this.selectedVoice);
     }
-  }
-};
+    const playSpeech=()=> {
+      if (audioUrl.value) {
+        audioPlayer.value.play();
+        playing.value = true;
+      }
+    }
+    const stopSpeech=()=>{
+      if (audioUrl.value) {
+        audioPlayer.value.pause();
+        audioPlayer.value.currentTime = 0;
+        playing.value = false;
+      }
+    }
+    const updateVoice=()=> {
+      // 可选：在语音种类更新时进行处理
+      console.log('Voice selection updated:', selectedVoice.value);
+    }
+
 </script>
 
 <style scoped>

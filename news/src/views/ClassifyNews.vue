@@ -7,8 +7,8 @@
           v-model="titleInput"
           class="textarea-input"
           :autosize="{ minRows: 10, maxRows: 15 }"
-          maxlength="1000"
-          placeholder="请输入1000字以内标题"
+          maxlength="30"
+          placeholder="请输入30字以内标题"
           show-word-limit
           clearable
           type="textarea"

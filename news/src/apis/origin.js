@@ -87,6 +87,30 @@ export default {
       throw error;
     }
   },
+  //词云生成
+  async generateCloud(UploadData) {
+    try {
+      console.log(
+        "发布的内容：" + UploadData.text + "类型" + UploadData.pic_no
+      );
+      const backend = await fetch("/get-cloud", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(UploadData),
+      });
+      const jsonData = await backend.json();
+      console.log("jsonData: ", jsonData);
+      if (jsonData.response.isError) {
+        console.log(jsonData.response.msg);
+        throw new Error("网络请求错误");
+      }
+      return jsonData.response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
   // 以下是一个get请求的例子
   async getAllLikes() {
     try {

@@ -8,6 +8,7 @@
 news/.DS_Store
 news/node_modules
 news/dist
+news/src/assets/output
 
 # local env files
 news/.env.local

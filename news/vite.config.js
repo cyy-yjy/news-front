@@ -43,6 +43,11 @@ export default defineConfig({
         // target: "http://127.0.0.1:4523/m1/4633956-0-default",
         changeOrigin: true,
       },
+      "/get-cloud": {
+        target: "http://127.0.0.1:8000",
+        //target: "http://127.0.0.1:4523/m1/4633956-0-default",
+        changeOrigin: true,
+      },
       "/get-title": {
         // target:"http://127.0.0.1:4523/m1/4633956-4284432-default",
         target: "http://127.0.0.1:7000",

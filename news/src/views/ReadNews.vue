@@ -2,76 +2,66 @@
   <div class="container">
     <header class="header">语音生成与播放器</header>
     <el-container>
-        <el-aside width="400px">
-          <div class="inform" style="margin: 25px;text-align: left;">请输入要生成语音的文本</div>
-  <div class="input-column">
-        <textarea v-model="textInput" rows="10" placeholder="请输入要生成语音的文本"></textarea>
-      </div>
-        </el-aside>
-        <el-main>
+      <el-aside width="400px">
+        <div class="inform" style="margin: 25px;text-align: left;">请输入要生成语音的文本</div>
+        <div class="input-column">
+          <textarea v-model="textInput" rows="10" placeholder="请输入要生成语音的文本"></textarea>
+        </div>
+      </el-aside>
+      <el-main>
         <div class="inform" style="margin-left: 25px;text-align: left;">请选择语音样式，你可以试听</div>
         <el-row style="margin-top: 20px;" :gutter="20">
-        <!-- 做一个卡片，它包括image，button -->
-        <div v-for="(item, index) in voice_list" :key="index">
-          <el-col :span="12" style="max-width: 400px" shadow="hover">
-            <el-card style="max-width: 430px;height: 380px;margin: 10px;position: relative;" shadow="hover">
-              <!-- 它还有一个标题 -->
-              <template #header>
-                <div class="card-header">
-          <span>{{ item.name }}</span>
-        </div>
+          <!-- 做一个卡片，它包括image，button -->
+          <div v-for="(item, index) in voice_list" :key="index">
+            <el-col :span="12" style="max-width: 400px" shadow="hover">
+              <el-card style="max-width: 430px;height: 380px;margin: 10px;position: relative;" shadow="hover">
+                <!-- 它还有一个标题 -->
+                <template #header>
+                  <div class="card-header">
+                    <span>{{ item.name }}</span>
+                  </div>
                 </template>
-              <el-image style="width: 320px; height: 160px" :src="cal(item.pic)" fit="cover" />
-              <audio controls style="margin-top: 10px;">
-                <source :src="cal(item.url)" type="audio/mpeg">
-                您的浏览器不支持 audio 元素。
-              </audio>
-              <el-button size="large" round  color="#626aef" :plain="index !== selectedVoice"
-                style="width: 80px;position: absolute;left: 50%;transform: translateX(-50%); bottom: 20px;"
-                @click="handleSelect(index)">
-                <i class="fi fi-rr-check-circle" v-show="index !== selectedVoice"></i>
-                <i class="fi fi-sr-check-circle" v-show="index === selectedVoice"></i>
-              </el-button>
-            </el-card>
-          </el-col>
-        </div>
-      </el-row>
-        </el-main>
-      </el-container>
-    
+                <el-image style="width: 320px; height: 160px" :src="cal(item.pic)" fit="cover" />
+                <audio controls style="margin-top: 10px;">
+                  <source :src="cal(item.url)" type="audio/mpeg">
+                  您的浏览器不支持 audio 元素。
+                </audio>
+                <el-button size="large" round color="#626aef" :plain="index !== selectedVoice"
+                  style="width: 80px;position: absolute;left: 50%;transform: translateX(-50%); bottom: 20px;"
+                  @click="handleSelect(index)">
+                  <i class="fi fi-rr-check-circle" v-show="index !== selectedVoice"></i>
+                  <i class="fi fi-sr-check-circle" v-show="index === selectedVoice"></i>
+                </el-button>
+              </el-card>
+            </el-col>
+          </div>
+        </el-row>
+      </el-main>
+    </el-container>
+
     <button style="margin-top: 40px;" class="defined_button" @click="generateSpeech" :disabled="generating">生成语音</button>
     <span v-if="generating" class="loading-text">生成中...</span>
     <el-container style="margin: 40px;">
       <el-aside width="45%">
         <el-row justify="end">
-          <el-tooltip
-          class="box-item"
-          effect="dark"
-          content="先点击上方按钮，生成音频，然后才能播放哦"
-          placement="top"
-        > 
-      <el-button class="yjy_defined_button" @click="playSpeech" :disabled="!audioUrl">从头开始听</el-button>
-      </el-tooltip>
-    </el-row>
-       <el-row justify="end">
-        <el-tooltip
-          class="box-item"
-          effect="dark"
-          content="有音频正在播放的时候才能暂停哦"
-          placement="bottom"
-        > 
-      <el-button class="yjy_defined_button" @click="stopSpeech" :disabled="!audioUrl || !playing">暂停</el-button>
-    </el-tooltip>    
-    </el-row>
-    </el-aside>
-  <el-main style="align-items: left;">
-    <div style="text-align: left;margin-bottom: 10px;margin-left: 20px;">生成的音频：</div>
-    <audio controls ref="audioPlayer">
+          <el-tooltip class="box-item" effect="dark" content="先点击上方按钮，生成音频，然后才能播放哦" placement="top">
+            <el-button class="yjy_defined_button" @click="playSpeech" :disabled="!audioUrl">从头开始听</el-button>
+          </el-tooltip>
+        </el-row>
+        <el-row justify="end">
+          <el-tooltip class="box-item" effect="dark" content="有音频正在播放的时候才能暂停哦" placement="bottom">
+            <el-button class="yjy_defined_button" @click="stopSpeech" :disabled="!audioUrl || !playing">暂停</el-button>
+          </el-tooltip>
+        </el-row>
+      </el-aside>
+      <el-main style="align-items: left;">
+        <div style="text-align: left;margin-bottom: 10px;margin-left: 20px;">生成的音频：</div>
+        <audio controls ref="audioPlayer">
           <source :src="audioUrl" type="audio/mpeg">
           您的浏览器不支持 audio 元素。
         </audio>
-        </el-main>
-  </el-container>
+      </el-main>
+    </el-container>
   </div>
 </template>
 
@@ -180,8 +170,9 @@ const stopSpeech = () => {
   font-weight: bold;
   margin-bottom: 2rem;
 }
-.card-header{
-  color:#626aef;
+
+.card-header {
+  color: #626aef;
   font-size: 18px;
   font-weight: bold;
 }
@@ -201,13 +192,6 @@ const stopSpeech = () => {
   /* 调整文本输入器宽度 */
 }
 
-.result-column {
-  display: flex;
-  justify-content: flex-end;
-  flex-direction: column;
-  align-items: right;
-  width: 100%; 
-}
 
 textarea {
   width: 100%;
@@ -222,22 +206,6 @@ textarea {
   /* 添加边框圆角 */
 }
 
-.control-panel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-  /* 调整按钮与文本框的间距 */
-}
-
-.button-panel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-}
 
 .defined_button {
   margin: 5px;
@@ -250,6 +218,7 @@ textarea {
   border-radius: 5px;
   cursor: pointer;
 }
+
 .yjy_defined_button {
   color: darkblue;
   font-weight: bolder;
@@ -262,14 +231,10 @@ textarea {
   margin-right: 50px;
   margin-bottom: 30px;
 }
+
 .defined_button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
-}
-
-input[type="number"] {
-  width: 80px;
-  /* 调整输入框宽度 */
 }
 
 .loading-text {

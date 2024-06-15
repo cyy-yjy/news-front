@@ -14,16 +14,12 @@
         <span v-if="generating" class="loading-text">生成中...</span>
       </div>
       <div class="result-column">
-        <button @click="playSpeech" :disabled="!audioUrl || playing">试听</button>
-        <button @click="stopSpeech" :disabled="!audioUrl || !playing">停止</button>
+        <button @click="playSpeech" :disabled="!audioUrl">从头开始听</button>
+        <button @click="stopSpeech" :disabled="!audioUrl || !playing">暂停</button>
         <audio controls ref="audioPlayer">
           <source :src="audioUrl" type="audio/mpeg">
           您的浏览器不支持 audio 元素。
         </audio>
-        <audio controls ref="audioPlayer2">
-            <source :src="try_output" type="audio/mpeg">
-            您的浏览器不支持 audio 元素。
-          </audio>
       </div>
     </div>
   </div>
@@ -49,14 +45,9 @@ function transformImagePath(path) {
   return `../assets/output/${fileName}`;
 }
 onMounted(() => {
-  const dir = new URL(transformImagePath('11_06_49.mp4'), import.meta.url);
-  console.log("文件路径为" + dir)
-  try_output.value = dir
-  audioPlayer2.value.load()
+  
 })
-const try_output=ref('')
 const audioPlayer = ref()
-const audioPlayer2 = ref()
 const audioUrl=ref('')
       const playing=ref(false)
       const selectedVoice=ref(0)
@@ -83,6 +74,7 @@ const audioUrl=ref('')
     }
     const playSpeech=()=> {
       if (audioUrl.value) {
+        audioPlayer.value.currentTime = 0;
         audioPlayer.value.play();
         playing.value = true;
       }
@@ -90,7 +82,6 @@ const audioUrl=ref('')
     const stopSpeech=()=>{
       if (audioUrl.value) {
         audioPlayer.value.pause();
-        audioPlayer.value.currentTime = 0;
         playing.value = false;
       }
     }

@@ -39,7 +39,7 @@ export default defineConfig({
         changeOrigin: true,
       },
       "/get-speech": {
-        //target: "http://127.0.0.1:6000",
+        //target: "http://127.0.0.1:9000",
         target: "http://127.0.0.1:4523/m1/4633956-0-default",
         changeOrigin: true,
       },

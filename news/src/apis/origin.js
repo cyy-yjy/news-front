@@ -66,6 +66,9 @@ export default {
   //语音生成
   async generatespeech(UploadData) {
     try {
+      console.log(
+        "发布的内容：" + UploadData.text + "类型" + UploadData.voice_type
+      );
       const backend = await fetch("/get-speech", {
         method: "POST",
         headers: {

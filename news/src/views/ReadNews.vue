@@ -26,7 +26,7 @@
                 <source :src="cal(item.url)" type="audio/mpeg">
                 您的浏览器不支持 audio 元素。
               </audio>
-              <el-button size="large" round type="success" :plain="index !== selectedVoice"
+              <el-button size="large" round  color="#626aef" :plain="index !== selectedVoice"
                 style="width: 80px;position: absolute;left: 50%;transform: translateX(-50%); bottom: 20px;"
                 @click="handleSelect(index)">
                 <i class="fi fi-rr-check-circle" v-show="index !== selectedVoice"></i>
@@ -39,18 +39,33 @@
         </el-main>
       </el-container>
     
-    <button class="defined_button" @click="generateSpeech" :disabled="generating">生成语音</button>
+    <button style="margin-top: 40px;" class="defined_button" @click="generateSpeech" :disabled="generating">生成语音</button>
     <span v-if="generating" class="loading-text">生成中...</span>
     <el-container style="margin: 40px;">
       <el-aside width="45%">
         <el-row justify="end">
+          <el-tooltip
+          class="box-item"
+          effect="dark"
+          content="先点击上方按钮，生成音频，然后才能播放哦"
+          placement="top"
+        > 
       <el-button class="yjy_defined_button" @click="playSpeech" :disabled="!audioUrl">从头开始听</el-button>
-      </el-row>
+      </el-tooltip>
+    </el-row>
        <el-row justify="end">
+        <el-tooltip
+          class="box-item"
+          effect="dark"
+          content="有音频正在播放的时候才能暂停哦"
+          placement="bottom"
+        > 
       <el-button class="yjy_defined_button" @click="stopSpeech" :disabled="!audioUrl || !playing">暂停</el-button>
-        </el-row>
+    </el-tooltip>    
+    </el-row>
     </el-aside>
   <el-main style="align-items: left;">
+    <div style="text-align: left;margin-bottom: 10px;margin-left: 20px;">生成的音频：</div>
     <audio controls ref="audioPlayer">
           <source :src="audioUrl" type="audio/mpeg">
           您的浏览器不支持 audio 元素。
@@ -81,27 +96,27 @@ const voice_list = ref([
   {
     name: '活泼少女音',
     pic: '../pics/voice1.jpg',
-    url: '../assets/output/01.mp4'
+    url: '../assets/voice/01.mp4'
   }, {
     name: '粤语女声',
     pic: '../pics/voice2.jpg',
-    url: '../assets/output/02.mp4'
+    url: '../assets/voice/02.mp4'
   }, {
     name: '东北婶婶',
     pic: '../pics/voice3.jpg',
-    url: '../assets/output/03.mp4'
+    url: '../assets/voice/03.mp4'
   }, {
     name: '粤语男声',
     pic: '../pics/voice4.jpg',
-    url: '../assets/output/04.mp4'
+    url: '../assets/voice/04.mp4'
   }, {
     name: '少年音',
     pic: '../pics/voice5.jpg',
-    url: '../assets/output/05.mp4'
+    url: '../assets/voice/05.mp4'
   }, {
     name: '沉稳大哥',
     pic: '../pics/voice6.jpg',
-    url: '../assets/output/06.mp4'
+    url: '../assets/voice/06.mp4'
   },
 ])
 function cal(url) {
@@ -166,13 +181,15 @@ const stopSpeech = () => {
   margin-bottom: 2rem;
 }
 .card-header{
-  color:deepskyblue;
+  color:#626aef;
   font-size: 18px;
   font-weight: bold;
 }
 
 .inform {
   color: cornflowerblue;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .input-column {
@@ -243,7 +260,7 @@ textarea {
   border-radius: 5px;
   cursor: pointer;
   margin-right: 50px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 .defined_button:disabled {
   opacity: 0.7;

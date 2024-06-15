@@ -79,29 +79,29 @@ function handleSelect(index) {
 //接下来做一个数组，它包含很多预先定义的字符串（名字），音频（预先生成的）
 const voice_list = ref([
   {
-    name: 'test',
-    pic: '../pics/1.jpg',
-    url: '../assets/output/11_06_49.mp4'
+    name: '活泼少女音',
+    pic: '../pics/voice1.jpg',
+    url: '../assets/output/01.mp4'
   }, {
-    name: 'test2',
-    pic: '../pics/2.png',
-    url: '../assets/output/11_23_54.mp4'
+    name: '粤语女声',
+    pic: '../pics/voice2.jpg',
+    url: '../assets/output/02.mp4'
   }, {
-    name: 'test2',
-    pic: '../pics/2.png',
-    url: '../assets/output/11_23_54.mp4'
+    name: '东北婶婶',
+    pic: '../pics/voice3.jpg',
+    url: '../assets/output/03.mp4'
   }, {
-    name: 'test2',
-    pic: '../pics/2.png',
-    url: '../assets/output/11_23_54.mp4'
+    name: '粤语男声',
+    pic: '../pics/voice4.jpg',
+    url: '../assets/output/04.mp4'
   }, {
-    name: 'test2',
-    pic: '../pics/2.png',
-    url: '../assets/output/11_23_54.mp4'
+    name: '少年音',
+    pic: '../pics/voice5.jpg',
+    url: '../assets/output/05.mp4'
   }, {
-    name: 'test2',
-    pic: '../pics/2.png',
-    url: '../assets/output/11_23_54.mp4'
+    name: '沉稳大哥',
+    pic: '../pics/voice6.jpg',
+    url: '../assets/output/06.mp4'
   },
 ])
 function cal(url) {

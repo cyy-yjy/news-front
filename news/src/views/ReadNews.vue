@@ -20,13 +20,17 @@
           <source :src="audioUrl" type="audio/mpeg">
           您的浏览器不支持 audio 元素。
         </audio>
+        <audio controls ref="audioPlayer2">
+            <source :src="try_output" type="audio/mpeg">
+            您的浏览器不支持 audio 元素。
+          </audio>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref,onMounted } from "vue";
 import origin from "@/apis/origin";
       const textInput=ref('')
       const voiceList=ref( [
@@ -37,8 +41,23 @@ import origin from "@/apis/origin";
         '湾隆',
         'Themba'
       ])
+//写一个函数用来把路径转成本地地址
+function transformImagePath(path) {
+  // 提取文件名（即最后一个 '/' 之后的部分）  
+  const fileName = path.split('/').pop();
+  // 构造新路径，使用 '@/dataset/' 作为前缀并接上文件名  
+  return `../assets/output/${fileName}`;
+}
+onMounted(() => {
+  const dir = new URL(transformImagePath('11_06_49.mp4'), import.meta.url);
+  console.log("文件路径为" + dir)
+  try_output.value = dir
+  audioPlayer2.value.load()
+})
+const try_output=ref('')
 const audioPlayer = ref()
-      const audioUrl=ref('')
+const audioPlayer2 = ref()
+const audioUrl=ref('')
       const playing=ref(false)
       const selectedVoice=ref(0)
       const generating=ref(false)
@@ -52,7 +71,7 @@ const audioPlayer = ref()
         };
         const response = await origin.generatespeech(data)
         //const dir = 'D:/vs_temp/text-to-speech/' + response
-        const dir='../assets/'+response
+        const dir= new URL(transformImagePath(response), import.meta.url);
         console.log("文件路径为" + dir)
         audioUrl.value = dir
         audioPlayer.value.load()

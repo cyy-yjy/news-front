@@ -1,4 +1,5 @@
 <template>
+    <div class="container">
   <header class="header">词云</header>
   <el-container>
     <el-aside width="570px">
@@ -46,6 +47,7 @@
     </template>
     <el-image style="width: 800px; height: 600px" :src="result" fit="contain" />
   </el-card>
+  </div>
 </template>
 <script setup>
 import { ref } from "vue";
@@ -108,7 +110,25 @@ const generateCloud = async () => {
   font-weight: bold;
   margin-bottom: 2rem;
 }
-
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin: auto;
+  position: relative;
+  align-items: center;
+  background-color: rgd(242, 242, 242);
+  /* border: 2px solid #ccc; */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding-bottom: 10px;
+  background-image: url('../pics/图片9.png');
+  filter: brightness(1.08);
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-size: auto;
+  /* 或者根据需要设置合适的背景大小 */
+}
 .card-header {
   color: #626aef;
   font-size: 18px;
@@ -135,6 +155,8 @@ const generateCloud = async () => {
   font-size: 20px;
   font-weight: bold;
   margin-top: 30px;
+  border-color: #346DAC;
+  background-color: #346DAC;
 }
 textarea {
   width: 100%;

@@ -2,7 +2,7 @@
   <div class="container">
     <header class="header">语音生成与播放器</header>
     <el-container>
-      <el-aside width="400px">
+      <el-aside width=50%>
         <div class="inform" style="margin: 25px;text-align: left;">请输入要生成语音的文本</div>
         <div class="input-column">
           <textarea v-model="textInput" rows="10" placeholder="请输入要生成语音的文本"></textarea>
@@ -41,7 +41,7 @@
 
     <button style="margin-top: 40px;" class="defined_button" @click="generateSpeech" :disabled="generating">生成语音</button>
     <span v-if="generating" class="loading-text">生成中...</span>
-    <el-container style="margin: 40px;">
+    <el-container style="width: 100%;">
       <el-aside width="45%">
         <el-row justify="end">
           <el-tooltip class="box-item" effect="dark" content="先点击上方按钮，生成音频，然后才能播放哦" placement="top">
@@ -56,7 +56,7 @@
       </el-aside>
       <el-main style="align-items: left;">
         <div style="text-align: left;margin-bottom: 10px;margin-left: 20px;">生成的音频：</div>
-        <audio controls ref="audioPlayer">
+        <audio controls ref="audioPlayer" style="width:50%">
           <source :src="audioUrl" type="audio/mpeg">
           您的浏览器不支持 audio 元素。
         </audio>
@@ -161,6 +161,12 @@ const stopSpeech = () => {
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin: auto;
+  position: relative;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding-bottom: 10px;
   /* align-items: center; */
 }
 

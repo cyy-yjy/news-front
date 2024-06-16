@@ -43,14 +43,6 @@
         <el-button style="margin-top: 15px;" color="#626aef" plain @click="saveAns()" :disabled="!titleResult">保存结果</el-button>
         </el-col>
   </el-row>
-        <!-- <el-input
-          v-model="titleResult"
-          class="result-input"
-          placeholder="Result"
-          clearable
-          type="text"
-        >
-        </el-input>  -->
       </div>
     </div>
     <div class="button-and-tags" >
@@ -82,40 +74,8 @@ import { onBeforeUnmount, onMounted } from "vue";
 
 const textInput = ref("");
 const titleResult = ref("");
-const historyRecords = ref([
-  {
-    front: "1",
-    text: "111",
-    title: "111",
-  },
-  {
-    front: "2",
-    text: "111",
-    title: "111",
-  },
-  {
-    front: "3",
-    text: "111",
-    title: "111",
-  },
-]);
-const reversedhistoryRecords = ref([
-  {
-    front: "31111111111111",
-    text: "111",
-    title: "111",
-  },
-  {
-    front: "2",
-    text: "111",
-    title: "111",
-  },
-  {
-    front: "1",
-    text: "111",
-    title: "111",
-  },
-]);
+const historyRecords = ref([]);
+const reversedhistoryRecords = ref([]);
 const selectedTagIndex = ref(-1);
 const saveAns = () => {
   let textFront = "";
@@ -139,21 +99,21 @@ const generateTitle = async () => {
   try {
     const response = await origin.generateTitle({ text: textInput.value });
     titleResult.value = response;
-    // let textFront = "";
-    // if (textInput.value.length < 10) {
-    //   textFront = textInput.value;
-    // } else {
-    //   textFront = textInput.value.slice(0, 10);
-    // }
-    // historyRecords.value.push({
-    //   front: textFront + "...",
-    //   text: textInput.value,
-    //   title: response.msg,
-    // });
-    // if (historyRecords.value.length > 5) {
-    //   historyRecords.value.shift(); //从头部去掉
-    // }
-    //reversedhistoryRecords.value = historyRecords.value.reverse();
+    let textFront = "";
+    if (textInput.value.length < 10) {
+      textFront = textInput.value;
+    } else {
+      textFront = textInput.value.slice(0, 10);
+    }
+    historyRecords.value.push({
+      front: textFront + "...",
+      text: textInput.value,
+      title: response.msg,
+    });
+    if (historyRecords.value.length > 5) {
+      historyRecords.value.shift(); //从头部去掉
+    }
+    reversedhistoryRecords.value = historyRecords.value.reverse();
     console.log("生成标题成功" + titleResult.value);
   } catch (error) {
     console.error("往后端传数据时出错：", error);
@@ -238,7 +198,7 @@ onBeforeUnmount(() => {
   text-align: center;
   cursor: pointer;
   position: relative;
-  border-color: rgb(77, 99, 163);
+  border-color: #CAE8F7;
   border-width: 2px;
 
 }
@@ -275,7 +235,7 @@ onBeforeUnmount(() => {
   flex-wrap: wrap;
   gap: 0.5rem;
   flex: unset;
-  border: 2px solid rgb(77, 99, 163);
+  border: 2px solid #CAE8F7;
   border-radius: 1rem;
   padding: 10px;
   width: 400px;
@@ -295,7 +255,7 @@ onBeforeUnmount(() => {
   text-align: center;
   cursor: pointer;
   position: relative;
-  border-color: rgb(77, 99, 163);
+  border-color: #CAE8F7;
   border-width: 2px;
 
 }
@@ -323,6 +283,8 @@ onBeforeUnmount(() => {
   /* 可选：添加左右内边距 */
   transition: all 0.3s ease;
   /* 添加过渡效果 */
+  background-image: url("../pics/23.jpg");
+  background-size: cover;
 }
 
 .tags:hover {

@@ -42,10 +42,13 @@
 
 <style scoped>
 .nav {
-  margin-top: 10px;
+  /* margin-top: 10px; */
   background-color: 	hsl(207, 50%, 85%,0.8);
+  background-image: url("../pics/23.jpg");
+  background-size: auto;
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
-
+margin-top: 10px;
+margin-bottom: 10px;
   padding: 10px 0;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);

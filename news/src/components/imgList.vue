@@ -20,22 +20,28 @@
 import img1 from "@/pics/14.jpg";
 import img2 from "@/pics/图片7.png";
 import img3 from "@/pics/13.jpg";
+import img4 from "@/pics/12.jpg";
 
 const carouselData = [
   {
     imageUrl: img1,
-    title: "新闻标题 1",
-    description: "新闻描述 1",
+    title: "生成标题",
+    description: "让AI为你的新闻生成有趣的标题吧!",
   },
   {
     imageUrl: img2,
-    title: "新闻标题 2",
-    description: "新闻描述 2",
+    title: "标题分类",
+    description: "你的新闻标题属于哪一类呢？",
   },
   {
     imageUrl: img3,
-    title: "新闻标题 3",
-    description: "新闻描述 3",
+    title: "获得词云图",
+    description: "看看你的新闻词云分布图！",
+  },
+  {
+    imageUrl:img4,
+    title:"语音识别",
+    description:"输入一段新闻，选择你喜欢的声音朗读吧！",
   },
 ];
 </script>

@@ -137,23 +137,13 @@ const classify = async () => {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   padding-bottom: 10px;
   min-height: 580px;
-}
-.container::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1; /* 将图片浮动在组件上方 */
   background-image: url('../pics/图片9.png');
-  filter:brightness(1.08);
+  filter: brightness(1.08);
   background-position: right bottom;
   background-repeat: no-repeat;
-  background-size: auto; /* 或者根据需要设置合适的背景大小 */
-  border-radius: 8px;
-  pointer-events: none; /* 禁止伪元素阻止鼠标事件穿透 */
+  background-size: auto;
 }
+
 .header {
   margin-top: 15px;
   font-size: 1.5rem;
@@ -178,7 +168,7 @@ const classify = async () => {
   text-align: center;
   cursor: pointer;
   position: relative;
-  border-color: rgb(118,113,113);
+  border-color: #70A1CC;
   border-width:2px;
 }
 
@@ -198,7 +188,7 @@ const classify = async () => {
   text-align: center;
   cursor: pointer;
   position: relative;
-  border-color: rgb(118,113,113);
+  border-color: #70A1CC;
   border-width:2px;
 
 }

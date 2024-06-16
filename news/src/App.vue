@@ -11,8 +11,21 @@
           class="login__particles"
           :options="particles"
         />
+ 
         <el-main>
           <router-view />
+          <el-tooltip
+        class="box-item"
+        effect="light"
+        content="回到菜单栏"
+        placement="top-start"
+      >
+          <div class="customBackTop" style="position: fixed; bottom: 100px; right: 5px; cursor: pointer;">
+            <div class="backButton"
+              @click="scrollToTop" v-show="showBackTop">
+            </div>
+          </div>
+        </el-tooltip>
         </el-main>
       </el-container>
     </div>
@@ -21,7 +34,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed,onUnmounted } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import { particles } from "@/components/particles/1.js";
 import Header from "@/components/header.vue";
@@ -31,6 +44,29 @@ import ImgList from "@/components/imgList.vue";
 import Title from "@/components/title.vue";
 import Test from "@/components/test.vue";
 import router from "@/router/index.js";
+// 方法定义
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 1394,
+    behavior: 'smooth'
+  });
+};
+// 控制返回顶部按钮的显示状态
+const showBackTop = ref(false);
+const handleScroll = () => {
+  showBackTop.value = window.scrollY > 1400; // 设置滚动高度阈值为200
+};
+onMounted(() => {
+  if (typeof window !== 'undefined') {
+    window.addEventListener('scroll', handleScroll);
+  }
+  console.log("mounted");
+});
+onUnmounted(() => {
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('scroll', handleScroll);
+  }
+});
 
 //-----------header-----------
 const username = "John Doe";
@@ -87,7 +123,7 @@ const handleSelect = (index) => {
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
-  background-image: url("./pics/19.png") url("./pics/20.png");
+  background-image: url("./pics/5.png");
   background-size: contain;
   background-repeat: repeat-y;
 }
@@ -123,7 +159,7 @@ const handleSelect = (index) => {
 .el-main {
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  margin: 5px 0 30px 0;
+  margin: 0;
   background-color: white;
   text-align: center;
   min-height: 600px;
@@ -131,7 +167,6 @@ const handleSelect = (index) => {
   background-image: url("./pics/16.png");
   background-size: cover;
   background-position: right bottom;
-  background-size: cover;
 }
 </style>
 
@@ -155,7 +190,18 @@ const handleSelect = (index) => {
   text-align: center;
 }
 .login__particles {
-  z-index: -1;
-  opacity: 0.7;
+  z-index: 1;
+  opacity: 1;
+  pointer-events: none; /* 禁止伪元素阻止鼠标事件穿透 */
+}
+.backButton{
+  background-color: rgb(226,226,226);
+  background-image: url('./pics/2.png');
+  background-size: cover;
+  text-align: center;
+  color: #1989fa;
+  line-height: 40px;
+  height: 80px;
+  width: 80px;
 }
 </style>

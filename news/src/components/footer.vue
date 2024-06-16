@@ -28,8 +28,16 @@ export default {
   color: #333;
   font-size: 14px;
   width: 100%;
+  margin-top: 10px;
 }
-
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin: auto;
+  position: relative;
+  align-items: center;
+}
 .footer a {
   color: #333;
   text-decoration: none;

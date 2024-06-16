@@ -183,7 +183,7 @@ export const particles = {
       },
     },
     color: {
-      value: ["#1E00FF", "#FF0061", "#E1FF00", "#00FF9E"],
+      value: ["#CAE8F7", "#D1DBE6", "#4078B9", "#70A1CC"],
       animation: {
         h: {
           count: 0,
@@ -273,7 +273,7 @@ export const particles = {
       size: false,
       speed: {
         min: 50,
-        max: 150,
+        max: 100,
       },
       spin: {
         acceleration: 0,

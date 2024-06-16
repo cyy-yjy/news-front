@@ -5,7 +5,7 @@
     <el-aside width="570px">
       <div class="inform" style="margin: 25px;text-align: left;">请输入要生成词云的文本</div>
       <div class="input-column">
-        <textarea v-model="textInput" rows="10" placeholder="请输入要生成词云的文本"></textarea>
+        <el-input clearable type="textarea" :autosize="{ minRows: 30, maxRows: 30 }" class="textarea-input" v-model="textInput" placeholder="请输入要生成词云的文本"></el-input>
       </div>
     </el-aside>
     <el-main>
@@ -23,7 +23,7 @@
                 </div>
               </template>
               <el-image style="width: 240px; height: 200px" :src="cal(item.pic)" fit="contain" />
-              <el-button size="large" round color="#626aef" :plain="index !== selected"
+              <el-button size="large" round color="#31779a" :plain="index !== selected"
                 style="width: 130px;position: absolute;left: 50%;transform: translateX(-50%); bottom: 20px;"
                 @click="handleSelect(index)">
                 <i class="fi fi-rr-check-circle" v-show="index !== selected"></i>
@@ -104,6 +104,10 @@ const generateCloud = async () => {
 }
 </script>
 <style scoped>
+.textarea-input{
+  color: rgb(118, 113, 113);
+  font-size: 15px;
+}
 .header {
   margin-top: 15px;
   font-size: 1.5rem;
@@ -130,9 +134,10 @@ const generateCloud = async () => {
   /* 或者根据需要设置合适的背景大小 */
 }
 .card-header {
-  color: #626aef;
+  color: #31779a;
   font-size: 18px;
   font-weight: bold;
+  font-family:'微软雅黑';
 }
 
 .inform {
@@ -148,6 +153,15 @@ const generateCloud = async () => {
   width: 90%;
   height: 730px;
   /* 调整文本输入器宽度 */
+  flex-direction: column;
+  align-items: center;
+  padding: 4px;
+  border-radius: 1rem;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  border-color: #CAE8F7;
+  border-width: 2px;
 }
 .submit_button{
   height: 50px;

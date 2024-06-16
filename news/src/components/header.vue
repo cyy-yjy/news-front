@@ -36,7 +36,7 @@
       <span class="date">{{ currentDate }}</span>
       <span class="day">{{ currentDay }}</span>
     </div>
-    <div class="user-info">
+    <!-- <div class="user-info">
       <el-dropdown>
         <div class="user-avatar">
           <img src="@/assets/avatar.png" alt="Avatar" />
@@ -49,7 +49,7 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-    </div>
+    </div> -->
   </header>
 </template>
 

@@ -2,10 +2,11 @@
   <div class="container">
     <header class="header">语音生成与播放器</header>
     <el-container>
-      <el-aside width=50%>
+      <el-aside width=30%>
         <div class="inform" style="margin: 25px;text-align: left;">请输入要生成语音的文本</div>
         <div class="input-column">
-          <textarea v-model="textInput" rows="10" placeholder="请输入要生成语音的文本"></textarea>
+          <el-input class="textarea-input" v-model="textInput" placeholder="请输入要生成语音的文本"
+          clearable type="textarea" :autosize="{ minRows: 50, maxRows: 50 }"></el-input>
         </div>
       </el-aside>
       <el-main>
@@ -14,7 +15,8 @@
           <!-- 做一个卡片，它包括image，button -->
           <div v-for="(item, index) in voice_list" :key="index">
             <el-col :span="12" style="max-width: 400px" shadow="hover">
-              <el-card style="max-width: 430px;height: 380px;margin: 10px;position: relative;" shadow="hover">
+              <el-card style="max-width: 430px;height: 380px;margin: 10px;
+              position: relative;"  shadow="hover">
                 <!-- 它还有一个标题 -->
                 <template #header>
                   <div class="card-header">
@@ -26,7 +28,7 @@
                   <source :src="cal(item.url)" type="audio/mpeg">
                   您的浏览器不支持 audio 元素。
                 </audio>
-                <el-button size="large" round color="#626aef" :plain="index !== selectedVoice"
+                <el-button size="large" round color="#31779a" :plain="index !== selectedVoice"
                   style="width: 80px;position: absolute;left: 50%;transform: translateX(-50%); bottom: 20px;"
                   @click="handleSelect(index)">
                   <i class="fi fi-rr-check-circle" v-show="index !== selectedVoice"></i>
@@ -38,8 +40,7 @@
         </el-row>
       </el-main>
     </el-container>
-
-    <button style="margin-top: 40px;" class="defined_button" @click="generateSpeech" :disabled="generating">生成语音</button>
+     <el-button type="warning" style="margin: 40px;" @click="generateSpeech" class="submit_button" :disabled="generating">生成语音</el-button>
     <span v-if="generating" class="loading-text">生成中...</span>
     <el-container style="width: 100%;">
       <el-aside width="45%">
@@ -157,6 +158,19 @@ const stopSpeech = () => {
 </script>
 
 <style scoped>
+.submit_button{
+  height: 50px;
+  width: 200px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 30px;
+  border-color: #346DAC;
+  background-color: #346DAC;
+}
+.textarea-input{
+  color: rgb(118, 113, 113);
+  font-size: 15px;
+}
 .container {
   width: 100%;
   display: flex;
@@ -178,7 +192,7 @@ const stopSpeech = () => {
 }
 
 .card-header {
-  color: #626aef;
+  color: #31779a;
   font-size: 18px;
   font-weight: bold;
 }
@@ -196,6 +210,13 @@ const stopSpeech = () => {
   width: 90%;
   height: 1200px;
   /* 调整文本输入器宽度 */
+  flex-direction: column;
+  padding: 4px;
+  border-radius: 1rem;
+  cursor: pointer;
+  position: relative;
+  border-color: #CAE8F7;
+  border-width: 2px;
 }
 
 
@@ -217,7 +238,7 @@ textarea {
   margin: 5px;
   padding: 10px 20px;
   /* 调整按钮内边距 */
-  background-color: #007BFF;
+  background-color: #65bdf0;
   /* 修改按钮底色 */
   color: white;
   border: none;
@@ -226,7 +247,8 @@ textarea {
 }
 
 .yjy_defined_button {
-  color: darkblue;
+  color:black;
+  background-color:#CAE8F7;
   font-weight: bolder;
   width: 100px;
   height: 50px;

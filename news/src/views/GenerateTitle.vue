@@ -139,7 +139,16 @@ const openHistory = (index: number) => {
   textInput.value = reversedhistoryRecords.value[index].text;
   titleResult.value = reversedhistoryRecords.value[index].title;
 };
-onMounted(() => { });
+onMounted(() => {   
+  console.log("开始渲染");
+  console.log(localStorage.getItem("title"))
+  let history = JSON.parse(localStorage.getItem("historyRecords"));
+  if (history) {
+    historyRecords.value = history;
+    reversedhistoryRecords.value = historyRecords.value.reverse();
+  }
+  console.log("mount");
+});
 onBeforeUnmount(() => {
   localStorage.clear();
   console.log(titleResult.value)

@@ -199,7 +199,64 @@ const classify = async () => {
   gap: 1rem;
   width: 100%;
 }
-
+.tags{
+  color: white;
+  background-color: rgb(77, 99, 151);
+  height: 30px;
+  min-width: 50px;
+  width: auto;
+  font-size: 15px;
+  display: inline-flex;
+  /* 让元素居中对齐 */
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  /* 可选：让标签有圆角 */
+  padding: 0 10px;
+  /* 可选：添加左右内边距 */
+  transition: all 0.3s ease;
+  /* 添加过渡效果 */
+  background-image: url("../pics/23.jpg");
+  background-size: cover;
+}
+.button-new-tag{
+  color: white;
+  background-color: #CAE8F7;
+  filter: brightness(0.9);
+  height: 30px;
+  min-width: 50px;
+  width: auto;
+  font-size: 15px;
+  display: inline-flex;
+  /* 让元素居中对齐 */
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  /* 可选：让标签有圆角 */
+  padding: 0 10px;
+  /* 可选：添加左右内边距 */
+  transition: all 0.3s ease;
+  /* 添加过渡效果 */
+}
+.tags:hover {
+  color: rgb(77, 99, 151);
+  background-color: white;
+  cursor: pointer;
+}
+.history-tags {
+  flex-direction: column;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  flex: unset;
+  border: 2px solid #CAE8F7;
+  border-radius: 1rem;
+  padding: 10px;
+  width: 400px;
+  min-height: 304px;
+  height: auto;
+  background-position-x: right;
+}
 .search-button {
   width: 30%;
   /* background-color: var(--el-color-primary); */

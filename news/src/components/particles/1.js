@@ -183,12 +183,12 @@ export const particles = {
       },
     },
     color: {
-      value: ["#CAE8F7", "#D1DBE6", "#4078B9", "#70A1CC"],
+      value: ["#CAE8F7", "#D1DBE6", "#4078B9", "#70A1CC","#759EC1"],
       animation: {
         h: {
           count: 0,
           enable: true,
-          speed: 30,
+          speed: 3,
           decay: 0,
           delay: 0,
           sync: true,
@@ -206,7 +206,7 @@ export const particles = {
         l: {
           count: 0,
           enable: false,
-          speed: 1,
+          speed: 30,
           decay: 0,
           delay: 0,
           sync: true,

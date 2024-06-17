@@ -25,7 +25,7 @@
           然后就能在这里显示标题了哦 <br>
         </div>
         <!-- 右边的结果区域 -->
-        <el-input :disabled="!textInput" v-model="titleResult" class="textarea-input" :autosize="{ minRows: 10, maxRows: 15 }" maxlength="1000"
+        <el-input :disabled="!textInput" v-model="titleResult" class="textarea-input" :autosize="{ minRows: 20, maxRows: 20 }" maxlength="1000"
           clearable type="text">
           <template #prepend>
             生成结果：
@@ -108,7 +108,7 @@ const generateTitle = async () => {
     historyRecords.value.push({
       front: textFront + "...",
       text: textInput.value,
-      title: response.msg,
+      title: titleResult.value,
     });
     if (historyRecords.value.length > 5) {
       historyRecords.value.shift(); //从头部去掉
@@ -141,20 +141,21 @@ const openHistory = (index: number) => {
 };
 onMounted(() => {   
   console.log("开始渲染");
-  console.log(localStorage.getItem("title"))
+  console.log(localStorage.getItem("historyRecords"))
   let history = JSON.parse(localStorage.getItem("historyRecords"));
   if (history) {
     historyRecords.value = history;
     reversedhistoryRecords.value = historyRecords.value.reverse();
   }
   console.log("mount");
+  // localStorage.clear();
 });
 onBeforeUnmount(() => {
-  localStorage.clear();
   console.log(titleResult.value)
   localStorage.setItem("text", textInput.value);
   localStorage.setItem("title", titleResult.value);
   localStorage.setItem("historyRecords", JSON.stringify(historyRecords.value));
+  console.log(localStorage.getItem("historyRecords"));
   console.log("组件即将被卸载");
 });
 </script>
@@ -214,6 +215,7 @@ onBeforeUnmount(() => {
 
 .textarea-input {
   width: 400px;
+  height:auto;
   color: rgb(118, 113, 113);
   font-size: 15px;
   margin-bottom: 15px;
